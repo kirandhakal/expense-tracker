@@ -1,0 +1,276 @@
+/* :root{
+  background-color: black;
+} */
+*{
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 24px;
+}
+
+.brand-name {
+  color: white;
+  text-decoration: none;
+}
+
+.nav {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav li {
+  margin: 0 15px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.nav a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.icon {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+/* navbar end */
+/* landing */
+.main{
+  display: flex;
+  width: 100%;
+  background-color: #555;
+ align-items: center;
+ justify-content: center;
+  border: 3px solid red;
+  height: 30vh;
+}
+p{
+  color: red;
+  font-size: 1.2rem;
+}
+h2{
+  color: aliceblue;
+  font-size: 3.2rem;
+}
+/*  */
+.box-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+}
+
+/* Style for each box */
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+/* Style for active box when hovered */
+.box.active {
+  width: 120px;
+}
+
+/* Fade effect for other boxes when one is active */
+.box.fade {
+  opacity: 0;
+}
+/* footer */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  /* No need for position: relative; here */
+}
+.test1{
+  color: red;
+  background-color: aliceblue;
+}
+h3{
+  color: aliceblue;
+}
+
+
+
+.itemwelcome{
+  background-color: rgb(29, 94, 150);
+  color: green;
+  text-align: center;
+  font-size: 2rem;
+}
+.itemlog{
+  background-color: aliceblue;
+  color: red;
+  text-align: center;
+
+}
+
+.codecontainer {
+  display: flex;
+  justify-content: center; /* Added later */
+  flex-direction: row;
+  height: calc(80vh - 2rem); /* Adjusted for theme switcher height */
+  transition: all 0.3s ease;
+  margin: 10px;
+  border: 10px solid rgb(0, 255, 136);
+  
+}
+
+.editor-section, .input-output-section {
+  flex: 1;
+  overflow: hidden;
+}
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: inherit; /* Inherit background color */
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  background-color: inherit; /* Inherit background color */
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.select-container {
+  flex: 1;
+}
+
+.form-select {
+  width: 30%;
+  border-radius: 0.25rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success {
+  background-color: #28a745; 
+}
+
+.btn-success:hover {
+  background-color: hsl(135, 67%, 2%);
+  color: aqua;
+}
+
+.btn-primary {
+  background-color: #007bff; 
+}
+
+.btn-primary:hover {
+  background-color: hsl(135, 67%, 2%);
+  color: aqua;
+
+}
+
+.btn-info {
+  background-color: #17a2b8; /* Teal background */
+}
+
+.btn-info:hover {
+  background-color: hsl(135, 67%, 2%);
+  color: aqua;
+
+}
+
+.textarea-editor {
+  /* width: 90%; */
+  flex: 1;
+  background-color: inherit; /* Inherit background color */
+  color: inherit; /* Inherit text color */
+  border: 1px solid #ced4da; /* Light border */
+  border-radius: 0.5rem;
+  padding: 2rem;
+  font-size: 1rem;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Styling for the input/output section */
+.input-output-section {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: inherit; /* Inherit background color */
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.input-container, .output-container {
+  margin: 1.5rem;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+}
+
+.textarea-input, .textarea-output {
+  width: 100%;
+  background-color: inherit; /* Inherit background color */
+  color: inherit; /* Inherit text color */
+  border: 1px solid #ced4da; /* Light border */
+  border-radius: 0.5rem;
+  margin: 10px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.textarea-input, .textarea-output {
+  height: 50%; /* Adjust heights as needed */
+}
+
+.fullscreen .container {
+  height: 100vh;
+  flex-direction: column;
+}
+
+.fullscreen .input-output-section {
+  margin-top: 1rem;
+}
+
+
