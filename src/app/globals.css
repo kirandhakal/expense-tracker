@@ -212,4 +212,35 @@
     font-weight: 500;
     letter-spacing: 0.01em;
   }
+
+  /* Animate in */
+  .animate-in {
+    animation: pageEnter 0.25s ease-out forwards;
+  }
+
+  /* Sticky note hover */
+  .sticky-note:hover {
+    transform: rotate(0deg) scale(1.03) !important;
+    z-index: 999 !important;
+  }
+
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Smooth scrollbar for sticky notes panel */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  /* Kanban card active hover glow */
+  .kanban-card:hover {
+    border-color: var(--color-primary-light);
+  }
 }

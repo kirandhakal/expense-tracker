@@ -4,7 +4,7 @@ import DashboardLayout from '@/components/layout/DashboardLayout';
 import SummaryCards from '@/components/features/SummaryCards';
 import TransactionList from '@/components/features/TransactionList';
 import { MonthlyBarChart, ExpensePieChart } from '@/components/features/Charts';
-import MemberCard from '@/components/features/MemberCard';
+import MemberReportSection from '@/components/features/MemberReportSection';
 import Card from '@/components/ui/Card';
 import {
     mockDashboardSummary,
@@ -12,6 +12,7 @@ import {
     mockMembers,
     monthlyData,
     categoryBreakdown,
+    defaultMemberGroups,
 } from '@/data/mockData';
 import Link from 'next/link';
 
@@ -61,6 +62,13 @@ export default function DashboardPage() {
                     <ExpensePieChart data={categoryBreakdown} />
                 </Card>
             </div>
+
+            {/* ===== NEW: Member Reports Section ===== */}
+            <MemberReportSection
+                transactions={mockTransactions}
+                members={mockMembers}
+                defaultGroups={defaultMemberGroups}
+            />
 
             {/* Bottom Row */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-6">

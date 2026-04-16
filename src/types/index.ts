@@ -26,11 +26,12 @@ export interface Transaction {
   date: string;
   description?: string;
   accountId: string;
+  memberId?: string; // link transaction to a member
 }
 
 // --- Account & Member Types ---
 export type AccountType = 'personal' | 'family' | 'business';
-export type MemberRole = 'owner' | 'admin' | 'member' | 'child';
+export type MemberRole = 'owner' | 'admin' | 'member' | 'child' | string;
 
 export interface Member {
   id: string;
@@ -40,6 +41,14 @@ export interface Member {
   avatar: string;
   accountType: AccountType;
   joinedDate: string;
+}
+
+// --- Member Group (custom people combos) ---
+export interface MemberGroup {
+  id: string;
+  name: string;
+  memberIds: string[];
+  color: string;
 }
 
 // --- Planning Module Types ---
@@ -68,7 +77,28 @@ export interface KanbanTask {
   priority: TaskPriority;
   assignee?: string;
   dueDate?: string;
+  dueTime?: string;
   tags: string[];
+}
+
+// --- Sticky Notes ---
+export interface StickyNote {
+  id: string;
+  content: string;
+  color: string;
+  x: number;
+  y: number;
+  page: string; // which page the note belongs to, or 'global'
+  createdAt: string;
+}
+
+// --- Time Range Filter ---
+export type TimeRangePreset = 'monthly' | 'quarterly' | 'yearly' | 'custom';
+
+export interface TimeRange {
+  preset: TimeRangePreset;
+  startDate: string;
+  endDate: string;
 }
 
 // --- Dashboard Summary ---
