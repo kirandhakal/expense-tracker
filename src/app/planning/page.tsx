@@ -7,8 +7,9 @@ import Input from '@/components/ui/Input';
 import Select from '@/components/ui/Select';
 import Button from '@/components/ui/Button';
 import GoalCard from '@/components/features/GoalCard';
+import PlanningCharts from '@/components/features/PlanningCharts';
 import { mockGoals } from '@/data/mockData';
-import { FinancialGoal, GoalStatus } from '@/types';
+import { FinancialGoal } from '@/types';
 
 const statusFilterOptions = [
     { value: 'all', label: 'All Goals' },
@@ -30,6 +31,7 @@ export default function PlanningPage() {
     const [goals, setGoals] = useState<FinancialGoal[]>(mockGoals);
     const [showForm, setShowForm] = useState(false);
     const [statusFilter, setStatusFilter] = useState('all');
+    const [showCharts, setShowCharts] = useState(true);
 
     // Form
     const [title, setTitle] = useState('');
@@ -104,8 +106,24 @@ export default function PlanningPage() {
                 </Card>
             </div>
 
+            {/* ===== NEW: Graphical Reports Toggle ===== */}
+            <div className="flex items-center gap-3 mb-6">
+                <button
+                    onClick={() => setShowCharts(!showCharts)}
+                    className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-[var(--radius-md)] transition-all duration-200 ${showCharts
+                            ? 'bg-[var(--color-primary)] text-white shadow-sm'
+                            : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]'
+                        }`}
+                >
+                    📈 {showCharts ? 'Hide Reports' : 'Show Reports'}
+                </button>
+            </div>
+
+            {/* ===== NEW: Planning Charts ===== */}
+            {showCharts && <PlanningCharts goals={goals} />}
+
             {/* Toolbar */}
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-3 mb-6 mt-6">
                 <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import StickyNotesWidget from '@/components/features/StickyNotes';
 
 export const metadata: Metadata = {
   title: 'ExpenseTracker - Smart Finance & Project Management',
@@ -22,7 +23,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <StickyNotesWidget />
+      </body>
     </html>
   );
 }
