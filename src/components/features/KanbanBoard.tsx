@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { KanbanTask, KanbanColumn, TaskPriority } from '@/types';
 import Badge from '@/components/ui/Badge';
 
@@ -66,7 +66,7 @@ export default function KanbanBoard({ initialTasks }: KanbanBoardProps) {
         setShowAddForm(true);
     };
 
-    const handleAddTask = (e: React.FormEvent) => {
+    const handleAddTask = useCallback((e: React.FormEvent) => {
         e.preventDefault();
         if (!newTitle.trim()) return;
 
@@ -85,9 +85,9 @@ export default function KanbanBoard({ initialTasks }: KanbanBoardProps) {
                 .filter(Boolean),
         };
 
-        setTasks([...tasks, newTask]);
+        setTasks((prev) => [...prev, newTask]);
         resetForm();
-    };
+    }, [newTitle, newDescription, addToColumn, newPriority, newAssignee, newDueDate, newDueTime, newTags]);
 
     const resetForm = () => {
         setNewTitle('');

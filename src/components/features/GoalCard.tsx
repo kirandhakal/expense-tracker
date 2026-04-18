@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { FinancialGoal } from '@/types';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -22,12 +23,14 @@ const categoryEmoji: Record<string, string> = {
 };
 
 export default function GoalCard({ goal }: GoalCardProps) {
-    const daysLeft = Math.max(
-        0,
-        Math.ceil(
-            (new Date(goal.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
-        )
-    );
+    const daysLeft = useMemo(() => {
+        return Math.max(
+            0,
+            Math.ceil(
+                (new Date(goal.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+            )
+        );
+    }, [goal.deadline]);
 
     return (
         <Card id={`goal-${goal.id}`}>

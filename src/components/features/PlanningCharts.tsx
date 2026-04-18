@@ -45,7 +45,8 @@ export default function PlanningCharts({ goals }: PlanningChartsProps) {
     });
     const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
 
-    const handleRangeChange = (start: string, end: string, _preset: TimeRangePreset) => {
+    const handleRangeChange = (start: string, end: string, _preset?: TimeRangePreset) => {
+        void(_preset);
         setDateRange({ start, end });
     };
 

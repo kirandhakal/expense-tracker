@@ -48,7 +48,8 @@ export default function MemberReportSection({
     const [viewMode, setViewMode] = useState<'individual' | 'comparison'>('comparison');
 
     // Handle date range changes
-    const handleRangeChange = (start: string, end: string, _preset: TimeRangePreset) => {
+    const handleRangeChange = (start: string, end: string, _preset?: TimeRangePreset) => {
+        void(_preset);
         setDateRange({ start, end });
     };
 

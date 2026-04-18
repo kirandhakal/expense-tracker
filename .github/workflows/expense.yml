@@ -3,8 +3,8 @@ name: expense
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [develop]
+  # pull_request:
+  #   branches: [develop]
 
 jobs:
   build:
