@@ -66,6 +66,17 @@ export default function KanbanBoard({ initialTasks }: KanbanBoardProps) {
         setShowAddForm(true);
     };
 
+    const resetForm = () => {
+        setNewTitle('');
+        setNewDescription('');
+        setNewPriority('medium');
+        setNewAssignee('');
+        setNewDueDate('');
+        setNewDueTime('');
+        setNewTags('');
+        setShowAddForm(false);
+    };
+
     const handleAddTask = useCallback((e: React.FormEvent) => {
         e.preventDefault();
         if (!newTitle.trim()) return;
@@ -88,17 +99,6 @@ export default function KanbanBoard({ initialTasks }: KanbanBoardProps) {
         setTasks((prev) => [...prev, newTask]);
         resetForm();
     }, [newTitle, newDescription, addToColumn, newPriority, newAssignee, newDueDate, newDueTime, newTags]);
-
-    const resetForm = () => {
-        setNewTitle('');
-        setNewDescription('');
-        setNewPriority('medium');
-        setNewAssignee('');
-        setNewDueDate('');
-        setNewDueTime('');
-        setNewTags('');
-        setShowAddForm(false);
-    };
 
     return (
         <div className="space-y-5">
