@@ -16,7 +16,8 @@ const accountTypeOptions = [
     { value: 'business', label: 'Business' },
 ];
 
-const roleOptions = [
+// Default hardcoded roles
+const defaultRoles = [
     { value: 'owner', label: 'Owner' },
     { value: 'admin', label: 'Admin' },
     { value: 'member', label: 'Member' },
@@ -35,15 +36,58 @@ export default function MembersPage() {
     const [showForm, setShowForm] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
 
+    // Dynamic roles (includes hardcoded + user-created)
+    const [customRoles, setCustomRoles] = useState<{ value: string; label: string }[]>([]);
+    const allRoleOptions = [
+        ...defaultRoles,
+        ...customRoles,
+        { value: '__other__', label: '✏️ Other (custom)' },
+    ];
+
     // Form state
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [role, setRole] = useState<MemberRole>('member');
     const [accountType, setAccountType] = useState<AccountType>('personal');
+    const [customRoleInput, setCustomRoleInput] = useState('');
+    const [showCustomRoleInput, setShowCustomRoleInput] = useState(false);
+
+    const handleRoleChange = (value: string) => {
+        if (value === '__other__') {
+            setShowCustomRoleInput(true);
+            setRole('');
+        } else {
+            setShowCustomRoleInput(false);
+            setRole(value as MemberRole);
+        }
+    };
+
+    const handleCustomRoleConfirm = () => {
+        const trimmed = customRoleInput.trim();
+        if (!trimmed) return;
+
+        const normalizedValue = trimmed.toLowerCase().replace(/\s+/g, '-');
+
+        // Check if already exists
+        const exists = allRoleOptions.some(
+            (r) => r.value === normalizedValue || r.label.toLowerCase() === trimmed.toLowerCase()
+        );
+
+        if (!exists) {
+            setCustomRoles((prev) => [
+                ...prev,
+                { value: normalizedValue, label: trimmed.charAt(0).toUpperCase() + trimmed.slice(1) },
+            ]);
+        }
+
+        setRole(normalizedValue as MemberRole);
+        setShowCustomRoleInput(false);
+        setCustomRoleInput('');
+    };
 
     const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();
-        if (!name.trim() || !email.trim()) return;
+        if (!name.trim() || !email.trim() || !role) return;
 
         const newMember: Member = {
             id: `mem-${Date.now()}`,
@@ -63,7 +107,10 @@ export default function MembersPage() {
         setMembers([...members, newMember]);
         setName('');
         setEmail('');
+        setRole('member');
         setShowForm(false);
+        setShowCustomRoleInput(false);
+        setCustomRoleInput('');
     };
 
     const filtered =
@@ -86,8 +133,8 @@ export default function MembersPage() {
                         key={tab.value}
                         onClick={() => setActiveTab(tab.value)}
                         className={`px-4 py-2 text-sm font-medium rounded-[var(--radius-md)] transition-colors ${activeTab === tab.value
-                                ? 'bg-[var(--color-primary)] text-white'
-                                : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]'
+                            ? 'bg-[var(--color-primary)] text-white'
+                            : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-surface-hover)]'
                             }`}
                     >
                         {tab.label}{' '}
@@ -138,12 +185,57 @@ export default function MembersPage() {
                                     setAccountType(e.target.value as AccountType)
                                 }
                             />
-                            <Select
-                                label="Role"
-                                options={roleOptions}
-                                value={role}
-                                onChange={(e) => setRole(e.target.value as MemberRole)}
-                            />
+                            <div className="flex flex-col gap-1.5">
+                                <Select
+                                    label="Role"
+                                    options={allRoleOptions}
+                                    value={showCustomRoleInput ? '__other__' : role}
+                                    onChange={(e) => handleRoleChange(e.target.value)}
+                                />
+
+                                {/* Custom Role Input */}
+                                {showCustomRoleInput && (
+                                    <div className="flex gap-2 mt-1">
+                                        <input
+                                            type="text"
+                                            value={customRoleInput}
+                                            onChange={(e) => setCustomRoleInput(e.target.value)}
+                                            placeholder="Type custom role name..."
+                                            className="flex-1 px-3 py-2 text-sm bg-[var(--color-bg)] border border-[var(--color-border)] rounded-[var(--radius-md)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)]"
+                                            autoFocus
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter') {
+                                                    e.preventDefault();
+                                                    handleCustomRoleConfirm();
+                                                }
+                                            }}
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={handleCustomRoleConfirm}
+                                            disabled={!customRoleInput.trim()}
+                                            className="px-3 py-2 text-sm font-medium bg-[var(--color-success)] text-white rounded-[var(--radius-md)] hover:opacity-90 disabled:opacity-50 transition-colors"
+                                        >
+                                            ✓
+                                        </button>
+                                    </div>
+                                )}
+
+                                {/* Show existing custom roles info */}
+                                {customRoles.length > 0 && (
+                                    <div className="flex flex-wrap gap-1 mt-1">
+                                        <span className="text-[10px] text-[var(--color-text-muted)]">Custom roles:</span>
+                                        {customRoles.map((cr) => (
+                                            <span
+                                                key={cr.value}
+                                                className="text-[10px] px-1.5 py-0.5 bg-[var(--color-primary-50)] text-[var(--color-primary)] rounded-full"
+                                            >
+                                                {cr.label}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className="flex justify-end pt-2">
                             <Button type="submit" size="lg">

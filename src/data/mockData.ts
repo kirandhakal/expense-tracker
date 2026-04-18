@@ -6,10 +6,12 @@ import {
     CategoryBreakdown,
     MonthlyData,
     DashboardSummary,
+    MemberGroup,
+    StickyNote,
 } from '@/types';
 
 // ============================================
-// Mock Transactions
+// Mock Transactions (linked to members)
 // ============================================
 export const mockTransactions: Transaction[] = [
     {
@@ -21,6 +23,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-15',
         description: 'April salary payment',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-002',
@@ -31,6 +34,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-14',
         description: 'Weekly groceries from store',
         accountId: 'acc-personal',
+        memberId: 'mem-002',
     },
     {
         id: 'txn-003',
@@ -41,6 +45,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-13',
         description: 'Monthly electricity bill',
         accountId: 'acc-family',
+        memberId: 'mem-002',
     },
     {
         id: 'txn-004',
@@ -51,6 +56,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-12',
         description: 'Web development project payment',
         accountId: 'acc-business',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-005',
@@ -61,6 +67,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-11',
         description: 'Monthly bus pass renewal',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-006',
@@ -71,6 +78,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-10',
         description: 'Family movie outing',
         accountId: 'acc-family',
+        memberId: 'mem-003',
     },
     {
         id: 'txn-007',
@@ -81,6 +89,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-09',
         description: 'Monthly health insurance premium',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-008',
@@ -91,6 +100,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-08',
         description: 'TypeScript masterclass',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-009',
@@ -101,6 +111,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-07',
         description: 'Dinner at Italian restaurant',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-010',
@@ -111,6 +122,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-01',
         description: 'Monthly apartment rent',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-011',
@@ -121,6 +133,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-05',
         description: 'Revenue from online store',
         accountId: 'acc-business',
+        memberId: 'mem-004',
     },
     {
         id: 'txn-012',
@@ -131,6 +144,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-04',
         description: 'Running shoes purchase',
         accountId: 'acc-personal',
+        memberId: 'mem-003',
     },
     {
         id: 'txn-013',
@@ -141,6 +155,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-03',
         description: 'Monthly internet subscription',
         accountId: 'acc-family',
+        memberId: 'mem-002',
     },
     {
         id: 'txn-014',
@@ -151,6 +166,7 @@ export const mockTransactions: Transaction[] = [
         date: '2026-04-02',
         description: 'Monthly savings allocation',
         accountId: 'acc-personal',
+        memberId: 'mem-001',
     },
     {
         id: 'txn-015',
@@ -161,6 +177,107 @@ export const mockTransactions: Transaction[] = [
         date: '2026-03-30',
         description: 'Consulting fee',
         accountId: 'acc-business',
+        memberId: 'mem-005',
+    },
+    // Additional historical data for richer reports
+    {
+        id: 'txn-016',
+        name: 'School Supplies',
+        amount: 85,
+        type: 'expense',
+        category: 'education',
+        date: '2026-03-15',
+        description: 'Books and stationery',
+        accountId: 'acc-family',
+        memberId: 'mem-003',
+    },
+    {
+        id: 'txn-017',
+        name: 'Gym Membership',
+        amount: 45,
+        type: 'expense',
+        category: 'health',
+        date: '2026-03-10',
+        description: 'Monthly gym subscription',
+        accountId: 'acc-personal',
+        memberId: 'mem-001',
+    },
+    {
+        id: 'txn-018',
+        name: 'Wife Salary',
+        amount: 3800,
+        type: 'income',
+        category: 'other',
+        date: '2026-03-15',
+        description: 'March salary',
+        accountId: 'acc-family',
+        memberId: 'mem-002',
+    },
+    {
+        id: 'txn-019',
+        name: 'Child Allowance Spent',
+        amount: 30,
+        type: 'expense',
+        category: 'entertainment',
+        date: '2026-03-20',
+        description: 'Games and snacks',
+        accountId: 'acc-family',
+        memberId: 'mem-006',
+    },
+    {
+        id: 'txn-020',
+        name: 'Clothing',
+        amount: 200,
+        type: 'expense',
+        category: 'shopping',
+        date: '2026-02-25',
+        description: 'Winter jacket',
+        accountId: 'acc-personal',
+        memberId: 'mem-002',
+    },
+    {
+        id: 'txn-021',
+        name: 'Bonus Payment',
+        amount: 2000,
+        type: 'income',
+        category: 'other',
+        date: '2026-01-15',
+        description: 'Q4 performance bonus',
+        accountId: 'acc-personal',
+        memberId: 'mem-001',
+    },
+    {
+        id: 'txn-022',
+        name: 'Utility Bills',
+        amount: 150,
+        type: 'expense',
+        category: 'bills',
+        date: '2026-01-10',
+        description: 'Gas and water bills',
+        accountId: 'acc-family',
+        memberId: 'mem-002',
+    },
+    {
+        id: 'txn-023',
+        name: 'Tuition Fee',
+        amount: 500,
+        type: 'expense',
+        category: 'education',
+        date: '2026-02-01',
+        description: 'School tuition',
+        accountId: 'acc-family',
+        memberId: 'mem-003',
+    },
+    {
+        id: 'txn-024',
+        name: 'Business Supplies',
+        amount: 340,
+        type: 'expense',
+        category: 'shopping',
+        date: '2026-02-15',
+        description: 'Office supplies',
+        accountId: 'acc-business',
+        memberId: 'mem-004',
     },
 ];
 
@@ -221,6 +338,30 @@ export const mockMembers: Member[] = [
         avatar: 'AJ',
         accountType: 'family',
         joinedDate: '2025-06-01',
+    },
+];
+
+// ============================================
+// Default Member Groups
+// ============================================
+export const defaultMemberGroups: MemberGroup[] = [
+    {
+        id: 'grp-001',
+        name: 'Me & Wife',
+        memberIds: ['mem-001', 'mem-002'],
+        color: '#4A90A4',
+    },
+    {
+        id: 'grp-002',
+        name: 'Me & Children',
+        memberIds: ['mem-001', 'mem-003', 'mem-006'],
+        color: '#6B9080',
+    },
+    {
+        id: 'grp-003',
+        name: 'Family',
+        memberIds: ['mem-001', 'mem-002', 'mem-003', 'mem-006'],
+        color: '#A47551',
     },
 ];
 
@@ -363,6 +504,30 @@ export const mockKanbanTasks: KanbanTask[] = [
         assignee: 'Sita Dhakal',
         dueDate: '2026-04-30',
         tags: ['savings', 'vacation'],
+    },
+];
+
+// ============================================
+// Mock Sticky Notes
+// ============================================
+export const mockStickyNotes: StickyNote[] = [
+    {
+        id: 'note-001',
+        content: 'Remember to check insurance renewal 🏥',
+        color: '#FEF3C7',
+        x: 20,
+        y: 100,
+        page: 'global',
+        createdAt: '2026-04-15T10:00:00',
+    },
+    {
+        id: 'note-002',
+        content: 'Transfer $500 to savings by end of month',
+        color: '#DBEAFE',
+        x: 300,
+        y: 150,
+        page: 'global',
+        createdAt: '2026-04-14T14:30:00',
     },
 ];
 
