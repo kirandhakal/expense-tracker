@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { FinancialGoal } from '@/types';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -22,12 +22,18 @@ const categoryEmoji: Record<string, string> = {
     education: '📚',
 };
 
+// eslint-disable react-hooks/purity
 export default function GoalCard({ goal }: GoalCardProps) {
-    const daysLeft = useMemo(() => {
-        return Math.max(
-            0,
-            Math.ceil(
-                (new Date(goal.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+    const [daysLeft, setDaysLeft] = useState(0);
+
+    useEffect(() => {
+        const now = Date.now();
+        setDaysLeft(
+            Math.max(
+                0,
+                Math.ceil(
+                    (new Date(goal.deadline).getTime() - now) / (1000 * 60 * 60 * 24)
+                )
             )
         );
     }, [goal.deadline]);
