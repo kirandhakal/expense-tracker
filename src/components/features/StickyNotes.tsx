@@ -91,7 +91,7 @@ export default function StickyNotesWidget() {
 
     return (
         <>
-            {/* Floating Toggle Button */}
+          
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="fixed bottom-6 right-6 z-[999] w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-lg transition-all duration-300 hover:scale-110"
@@ -107,7 +107,7 @@ export default function StickyNotesWidget() {
             {/* Notes Panel */}
             {isOpen && (
                 <div
-                    className="fixed bottom-20 right-6 z-[998] w-80 max-h-[70vh] card p-4 overflow-y-auto custom-scrollbar"
+                    className="fixed bottom-20 right-6 z-[998] w-90 max-h-[80vh] card p-4 overflow-y-auto custom-scrollbar"
                     style={{
                         animation: 'pageEnter 0.25s ease-out forwards',
                         boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
@@ -161,7 +161,7 @@ export default function StickyNotesWidget() {
                             return (
                                 <div
                                     key={note.id}
-                                    className="p-3 rounded-[var(--radius-md)] relative group transition-all duration-200 hover:shadow-md"
+                                    className="p-3 rounded-[var(--radius-md)] relative group transition-all duration-200 hover:shadow-sm"
                                     style={{ backgroundColor: note.color, color: colorConfig.text }}
                                 >
                                     {editingId === note.id ? (
@@ -236,7 +236,7 @@ export default function StickyNotesWidget() {
                     return (
                         <div
                             key={`float-${note.id}`}
-                            className={`fixed z-[997] w-44 p-3 rounded-[var(--radius-md)] shadow-lg cursor-grab select-none transition-shadow hover:shadow-xl ${draggingId === note.id ? 'cursor-grabbing shadow-xl scale-105' : ''
+                            className={`fixed z-[997] w-54 p-3 rounded-[var(--radius-md)] shadow-md cursor-grab select-none transition-shadow hover:shadow-sm ${draggingId === note.id ? 'cursor-grabbing shadow-xl scale-105' : ''
                                 }`}
                             style={{
                                 left: note.x,
@@ -248,7 +248,7 @@ export default function StickyNotesWidget() {
                             onMouseDown={(e) => handleMouseDown(e, note.id)}
                         >
                             <p className="text-xs leading-relaxed font-medium">{note.content}</p>
-                            <p className="text-[9px] mt-2 opacity-40">
+                            <p className="text-[10px] mt-2 opacity-80 font-medium">
                                 {new Date(note.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                             </p>
                         </div>
