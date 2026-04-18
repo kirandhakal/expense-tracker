@@ -6,7 +6,7 @@ import Card from '@/components/ui/Card';
 import TransactionList from '@/components/features/TransactionList';
 import AddTransactionForm from '@/components/features/AddTransactionForm';
 import { mockTransactions } from '@/data/mockData';
-import { Transaction, ExpenseCategory } from '@/types';
+import { Transaction } from '@/types';
 
 const categoryFilterOptions: { value: string; label: string }[] = [
     { value: 'all', label: 'All Categories' },
